@@ -79,3 +79,13 @@ SshcxApi::getInstance($token)->deleteFileByShort($short);
  * Delete all user files from ssh.cx
  */
 SshcxApi::getInstance($token)->deleteAllFiles();
+
+/**
+* Getting demo token with lifetime of 7 days.
+*/
+SshcxApi::getInstance($token)->getDemoToken('http://my-super-website.ru');
+
+/**
+* Setting production token instead of demo token with reassign short urls to production token
+*/
+SshcxApi::getInstance($token)->setProdToken('demo_123123', 'SECRET_TOKEN');

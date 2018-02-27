@@ -341,4 +341,42 @@ class SshcxApi {
             'all' => 1,
         ), 'file');
     }
+
+    ############## DEMO WORK
+
+    /**
+     * Getting demo token with lifetime of 7 days.
+     *
+     * @param $url
+     * @return bool|mixed|string
+     */
+    public function getDemoToken($url) {
+        $this->token = true;
+        $data = array(
+            'url' => $url,
+        );
+
+        $optPost = $this->optRequest;
+        $optPost['http']['content'] = http_build_query($data);
+        return $this->send($optPost, 'demo/new');
+    }
+
+    /**
+     * Setting production token instead of demo token
+     *
+     * @param string $demoToken
+     * @param string $prodToken
+     * @return bool|mixed|string
+     */
+    public function setProdToken($demoToken, $prodToken) {
+        $this->token = $prodToken;
+        $data = array(
+            'token' => $prodToken,
+            'demo_token' => $demoToken,
+        );
+
+        $optPost = $this->optRequest;
+        $optPost['http']['content'] = http_build_query($data);
+        return $this->send($optPost, 'demo/reassign');
+    }
 }
